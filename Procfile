@@ -1,2 +1,2 @@
-web: gunicorn Gym.wsgi
+web: gunicorn GymApi.wsgi
 release: python manage.py migrate
