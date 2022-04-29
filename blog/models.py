@@ -16,7 +16,9 @@ class AboutUs(models.Model):
         verbose_name = 'About Us'
         verbose_name_plural = 'About Us'
 
-class User(models.Model):
+
+
+class Users(models.Model):
     username = models.CharField(max_length=55)
     email = models.EmailField()
     phone = models.CharField(max_length=50)
@@ -31,7 +33,7 @@ class User(models.Model):
         verbose_name = 'User'
         verbose_name_plural = 'Users'
 
-
+        
 
 class Classes(models.Model):
     class_name = models.CharField(max_length=255)
@@ -48,7 +50,7 @@ class Classes(models.Model):
         verbose_name_plural = 'Classes'
 
 
-class Contact(models.Model):
+class Contacts(models.Model):
     title = models.CharField(max_length=255)
     phone = models.CharField(max_length=50)
     email = models.EmailField()

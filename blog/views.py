@@ -1,31 +1,29 @@
 from rest_framework.viewsets import ModelViewSet
 from .models import *
 from .serializers import *
-from rest_framework.permissions import IsAuthenticated
 
 
 
 class AboutUsViewSet(ModelViewSet):
     queryset = AboutUs.objects.all()
-    serializer_class = AboutUsSerializer
+    serializer_class = AboutUsSerializers
 
 
 class ClassesViewSet(ModelViewSet):
     queryset = Classes.objects.all()
-    serializer_class = ClassesSerializer
+    serializer_class = ClassesSerializers
 
 
 class SchedulesViewSet(ModelViewSet):
     queryset = Schedules.objects.all()
-    serializer_class = SchedulesSerializer
+    serializer_class = SchedulesSerializers
 
 
-class ContactViewSet(ModelViewSet):
-    queryset = Contact.objects.all()
-    serializer_class = ContactSerializer
+class ContactsViewSet(ModelViewSet):
+    queryset = Contacts.objects.all()
+    serializer_class = ContactsSerializers
 
 
-
-class UserViewSet(ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class UsersViewSet(ModelViewSet):
+    queryset = Users.objects.all()
+    serializer_class = UsersSerializers

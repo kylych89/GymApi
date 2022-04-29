@@ -10,7 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from datetime import timedelta
+import os
 from pathlib import Path
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +28,7 @@ SECRET_KEY = 'django-insecure-!csr*f%ugstn@407c_j&+c_h$8laxeg&r6(wyn#uej1_w6(_%u
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -44,17 +47,12 @@ INSTALLED_APPS = [
     #Second party
     'rest_framework',
     'rest_framework.authtoken',
+    'rest_framework_simplejwt',
     'drf_yasg',
     'corsheaders',
     'djoser',
 ]
 
-
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES':[
-        'rest_framework.authentication.TokenAuthentication'
-    ]
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -163,3 +161,24 @@ SWAGGER_SETTINGS = {
 
 CORS_ALLOW_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
+
+
+REST_FRAMEWORK = {
+   'DEFAULT_AUTHENTICATION_CLASSES': (
+       'rest_framework_simplejwt.authentication.JWTAuthentication',
+   ),
+}
+
+SIMPLE_JWT = {
+   'AUTH_HEADER_TYPES': ('JWT',),
+   'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),
+   'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+   'AUTH_TOKEN_CLASSES': (
+       'rest_framework_simplejwt.tokens.AccessToken',
+   )
+}
+
+DATABASES['default'].update(
+    dj_database_url.config(conn_max_age=0, ssl_require=True)
+)
+
